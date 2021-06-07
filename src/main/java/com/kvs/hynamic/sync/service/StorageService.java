@@ -1,6 +1,7 @@
 package com.kvs.hynamic.sync.service;
 
 import com.kvs.hynamic.sync.model.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ import java.util.*;
 @Service
 public class StorageService {
 
+    @Autowired
+    SyncService syncService;
+
     private FileInputStream in = null;
     private ObjectInputStream ois = null;
     private FileOutputStream out = null;
@@ -30,6 +34,7 @@ public class StorageService {
         BufferedWriter writer = new BufferedWriter(new FileWriter("maindbb.xml"));
         writer.write(content);
         writer.close();
+        syncService.sync();
         return "OK";
     }
 
@@ -96,4 +101,6 @@ public class StorageService {
         return "";
     }
 
+    public void start() {
+    }
 }
