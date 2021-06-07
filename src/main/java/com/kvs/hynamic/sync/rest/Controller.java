@@ -3,6 +3,7 @@ package com.kvs.hynamic.sync.rest;
 
 import com.kvs.hynamic.sync.model.Value;
 import com.kvs.hynamic.sync.service.StorageService;
+import com.kvs.hynamic.sync.service.SyncService;
 import org.apache.coyote.Response;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class Controller {
 
     @Autowired
     StorageService storageService;
+
+    @Autowired
+    SyncService syncService;
 
 
     private static org.jboss.logging.Logger logger = LoggerFactory.logger(Controller.class);
@@ -52,6 +56,7 @@ public class Controller {
     public String syncCommit(@RequestBody byte[] file) throws IOException {
         logger.info(String.format("New SYNC-COMMIT request arrived."));
         storageService.syncCommit(file);
+        syncService.sync();
         return "OK";
 
     }
