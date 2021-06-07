@@ -4,7 +4,9 @@ import com.kvs.hynamic.sync.service.StorageService;
 import com.kvs.hynamic.sync.service.SyncService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Startup implements InitializingBean {
 
     @Autowired
